@@ -1,9 +1,13 @@
 console.log("charger");
 var renderer, scene, camera, mesh;
 var url = "http://localhost/wootook_test/";
-init();
-animate();
 
+$("#planete").click(function() {
+	alert("le cliquage fonctionne");
+});
+
+	init();
+	animate();
 function init(){
     // on initialise le moteur de rendu
     renderer = new THREE.WebGLRenderer();
@@ -23,7 +27,7 @@ function init(){
     
 	// on créé la sphère et on lui applique une texture sous forme d’image
 	var geometry = new THREE.SphereGeometry( 200, 32, 32 );
-	var material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture(url+'Textures/p01.jpg', new THREE.SphericalReflectionMapping()), overdraw: true } );
+	var material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture('Textures/p01.jpg', new THREE.SphericalReflectionMapping()), overdraw: true } );
 	mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
 

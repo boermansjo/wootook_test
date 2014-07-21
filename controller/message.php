@@ -1,7 +1,5 @@
 <?php
 
-// include_once "/tools/includes.php";
-
 const MESSAGE_SUCCESS = "panel-success";
 const MESSAGE_INFORMATION = "panel-info";
 const MESSAGE_WARNING = "panel-warning";

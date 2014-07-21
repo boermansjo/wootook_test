@@ -27,6 +27,18 @@ CREATE TABLE IF NOT EXISTS `game_users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+CREATE TABLE IF NOT EXISTS `game_ressources` (
+  `rid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `coef_prod` int(1) NOT NULL DEFAULT '1',
+   PRIMARY KEY (`rid`),
+   UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO `ressources` (`rid`, `name`, `coef_prod`) VALUES
+(1, 'ressources1', 30),
+(2, 'ressources2', 20);
+(3, 'ressources3', 10);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
