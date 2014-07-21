@@ -2,11 +2,20 @@
 
 class Utilisateur {
 
+    private $id;
     private $identifiant;
     private $motDePasse;
     private $email;
     private $idPlaneteMere;
 
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+    
     public function getIdentifiant() {
         return $this->identifiant;
     }
@@ -20,7 +29,7 @@ class Utilisateur {
     }
 
     public function setMotDePasse($motDePasse) {
-        $this->motDePasse = $motDePasse;
+        $this->motDePasse = EncodePassword($motDePasse);
     }
 
     public function getEmail() {
@@ -38,8 +47,5 @@ class Utilisateur {
     public function setIdPlaneteMere($idPlaneteMere) {
         $this->idPlaneteMere = $idPlaneteMere;
     }
-
-    
 }
-
 ?>
