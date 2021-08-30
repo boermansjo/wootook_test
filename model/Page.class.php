@@ -5,7 +5,7 @@ class Page {
     const NAME_SCRIPTPAGE = "head_scriptpage";
     const NAME_CSSPAGE = "head_csspage";
     const NAME_FINALPAGE = "finalpage";
-    const DIR_TPL_IN_VIEW = "view/default/"; //Sera remplacé par le chemin de bdd.
+    const DIR_TPL_IN_VIEW = "view/default/template/"; //Sera remplacé par le chemin de bdd.
     const EXT_TEMPLATES = ".html";
     const DEFAULT_LANG = "fr";
 	const TITLE_PAGE = "Uniguerre";
@@ -74,26 +74,23 @@ class Page {
      * @param string $extension
      * @return void
      */
-    static function includeLang($filename, $extension = '.mo') {
-        global $user;
+    static function includeLang($filename,$extension) {
+        global $lang,$user;
 
-        $pathPattern = ROOT_PATH . "language/%s/{$filename}%s";
+        $pathPattern = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "language/%s/{$filename}%s";
         if (isset($user['lang']) && !empty($user['lang'])) {
-            if ($fp = @fopen($filename = sprintf($pathPattern, $user['lang'], '.csv'), 'r', true)) {
-                fclose($fp);
-
-                require_once $filename;
-                return;
-            } else if ($fp = @fopen($filename = sprintf($pathPattern, $user['lang'], $extension), 'r', true)) {
+			if ($fp = @fopen($filename = sprintf($pathPattern, $user['lang'], $extension),'r', true)) {
                 fclose($fp);
 
                 require_once $filename;
                 return;
             }
         }
-
-        require_once sprintf($pathPattern, self::DEFAULT_LANG, '.mo');
-        return;
+		else
+		{
+			require_once sprintf($pathPattern, self::DEFAULT_LANG,$extension);
+			return;
+		}
     }
 
     /**

@@ -1,6 +1,5 @@
 <?php
 
-
 require_once WOOTOOK_DIR_TOOLS . '/secure.php';
 
 class UtilisateurDAL {
@@ -13,7 +12,7 @@ class UtilisateurDAL {
             $sql = new _SQL();
 
             $sql->connexion();
-            $req = $sql->query($requete, $tables);
+            $req = $sql->prepare($requete, $tables);
             $sql->parametre($req, "id", $id);
             $sql->execute($req);
             while ($row = $req->fetch()) {
@@ -22,9 +21,9 @@ class UtilisateurDAL {
                 $u->setIdentifiant($row["username"]);
                 $u->setMotDePasse($row["password"]);
             }
-            
+
             $sql->deconnexion();
-            
+
             return $u;
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -52,5 +51,56 @@ class UtilisateurDAL {
         }
     }
 
+    static function verifierIdentiteConnexion($identifiant, $motDePasse) {
+        $requete = "SELECT * FROM {table1} WHERE username = :username ";
+        $tables = array("users");
+        $id = null;
+
+        try {
+            $sql = new _SQL();
+
+            $sql->connexion();
+            $req = $sql->prepare($requete, $tables);
+            $sql->parametre($req, "username", $identifiant);
+            $sql->execute($req);
+            while ($row = $req->fetch()) { 
+                $id = iif(crypt($motDePasse, $row["password"]) === $row["password"], $row["id"], -1);
+            }
+
+            $sql->deconnexion();
+
+            return $id;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+    
+    static function compterMemeNomUtilisateur($identifiant,$mail) {
+        $requete = "SELECT COUNT(*) AS nbJoueur FROM {table1} WHERE username = :username OR email =:email";
+        $tables = array("users");
+        $nb = null;
+        
+        try {
+            $sql = new _SQL();
+            
+            $sql->connexion();
+            $req = $sql->prepare($requete, $tables);
+            $sql->parametre($req, "username", $identifiant);
+			$sql->parametre($req, "email",$mail);
+            $sql->execute($req);
+            while ($row = $req->fetch()) { 
+                $nb = $row["nbJoueur"];
+            }
+            
+            $sql->deconnexion();
+
+            return $nb;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+            
+    }
+
 }
+
 ?>

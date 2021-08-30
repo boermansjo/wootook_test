@@ -64,10 +64,11 @@ $('.submit').click(function() {
 
 $('.content').remove();
 
-var a = 3;
-$('.content,.specific,.project,.share').draggable({ handle: '.title-inside', start: function(event, ui) { $(this).css("z-index", a++); }});
-$(".window").draggable({ handle: '.titleInside, .title-mac, .tab', refreshPositions: true, containment: 'window', start: function(event, ui) { $(this).css("z-index", a++); } });
-
+// var a = 3;
+// $(function() {
+// $('.content,.specific,.project,.share').draggable({ handle: '.title-inside', start: function(event, ui) { $(this).css("z-index", a++); }});
+// $(".window").draggable({ handle: '.titleInside, .title-mac, .tab', refreshPositions: true, containment: 'window', start: function(event, ui) { $(this).css("z-index", a++); } });
+// });
 
 //-----------------------------------------------------------------------------------
 //	4.	Dock
